@@ -52,6 +52,7 @@ public class MicroDVD {
         }
         File in = new File(pathIn);
         PrintWriter OutputFile = null;
+        
         try {
             OutputFile = new PrintWriter(pathOut);
         //błąd wczytywania pliku
@@ -68,6 +69,7 @@ public class MicroDVD {
             System.err.println("Invalid Path of PathOut: " + pathIn);
             return;
         }
+        
         while (scanner.hasNextLine()) {
             try {
                 OutputFile.println(MicroDVD.delay(scanner.nextLine(), delay_ms, framerate));
@@ -77,11 +79,7 @@ public class MicroDVD {
                 return;
             }
         }
-
-
-
         OutputFile.close();
-
     }
 
 
