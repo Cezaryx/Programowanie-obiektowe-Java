@@ -16,7 +16,7 @@ public class NewPanel extends JPanel {
         z2=izakresB;
         p=iprobe;
     }
-    //błędne działanie, rysunki są nie wyskalowane względem osi y
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -25,14 +25,25 @@ public class NewPanel extends JPanel {
         g.drawLine(250, 0, 250, 500);
         int[] y= new int [p];
         int[] x= new int [p];
-        System.out.println(d);
         for (int i = 0; i < p; i++) {
-            x [i] = z1 +i*abs(z2-z1/p);
-            y [i] = (a*x [i]*x [i]*x [i]+ b*x [i]*x [i] + c*x [i] +d);
+            x [i] = z1 +i*abs(z2-z1)/p;
+            y [i] = (a*x[i]*x[i]*x[i]+ b*x[i]*x[i] + c*x[i] +d);
         }
         g.setColor(Color.black);
-        for(int i = 0; i < p-1; i=i+500/p){
-            g.drawLine(i,250-y[i],i+1,250-y[i+1]);
+        int max = y[0];
+        for(int i=0; i<p;i++){
+            if(y[i]>max)
+                max=y[i];
+        }
+        int min = y[0];
+        for(int i=0; i<p;i++){
+            if(y[i]<min)
+                min=y[i];
+        }
+        int wsp = (max - min)/500;
+        System.out.println(wsp);
+        for(int i = 0; i < p-1; i++){
+            g.drawLine(i*500/p,250-y[i]/wsp,(i+1)*500/p,250-y[i+1]/wsp);
         }
     }
 }
