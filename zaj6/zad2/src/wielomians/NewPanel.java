@@ -40,10 +40,12 @@ public class NewPanel extends JPanel {
             if(y[i]<min)
                 min=y[i];
         }
-        int wsp = (max - min)/500;
-        System.out.println(wsp);
         for(int i = 0; i < p-1; i++){
-            g.drawLine(i*500/p,250-y[i]/wsp,(i+1)*500/p,250-y[i+1]/wsp);
+            if(y[i]<0 && y[i+1]<0){
+                g.drawLine(i*500/p,250+(y[i]*250/min),(i+1)*500/p,250+(y[i+1]*250/min));
+            }else{
+                g.drawLine(i*500/p,250-(y[i]*250/max),(i+1)*500/p,250-(y[i+1]*250/max));
+            }
         }
     }
 }
